@@ -1,0 +1,50 @@
+.main__Container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.main__InnerContainer {
+  padding-top: 40px;
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.main__SearchContainer {
+  padding: 10px;
+  width: 50%;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #7a7a7a;
+  border-radius: 15px;
+}
+
+.main__SearchContainer > input {
+  width: 90%;
+  font-size: 15px;
+  outline: none;
+  border: none;
+}
+
+.main__col1 {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main__col1__header {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+}
+
+.main__col1__header > button {
+  background: none;
+  outline: none;
+  border: none;
+}

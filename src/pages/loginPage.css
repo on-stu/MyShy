@@ -1,0 +1,96 @@
+.login__Container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.login__InnerContainer {
+  padding-top: 100px;
+  width: 60%;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login__inputContainer {
+  width: 60%;
+  height: 90%;
+  background-color: white;
+  border: 1px solid #7a7a7a;
+  border-radius: 15px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login__input {
+  margin-top: 10px;
+  padding: 10px;
+  width: 60%;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #7a7a7a;
+  border-radius: 15px;
+  box-sizing: border-box;
+}
+
+.login__input > input {
+  width: 100%;
+  font-size: 15px;
+  outline: none;
+  border: none;
+}
+
+.login__button {
+  margin-top: 10px;
+  width: 60%;
+}
+
+.login__button > Button {
+  width: 100%;
+  border-radius: 15px;
+  height: 45px;
+  font-size: 17px;
+  color: white;
+  box-sizing: border-box;
+  background-color: #537fa8;
+}
+
+.login__button > Button:hover {
+  width: 100%;
+  border-radius: 15px;
+  height: 45px;
+  font-size: 17px;
+  color: black;
+  box-sizing: border-box;
+}
+.login__social_button {
+  margin-top: 10px;
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+.login__social_button > Button {
+  width: 45%;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.login__social_button > .kakaoLogin {
+  width: 45%;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-image: url(../img/kakao_login.png);
+  background-position: center;
+  background-size: cover;
+}
+
+.login__social_button > .kakaoLogin:nth-child(0):hover {
+  cursor: pointer;
+}
