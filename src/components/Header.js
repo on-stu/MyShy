@@ -5,7 +5,6 @@ import "./header.css";
 
 function Header({ isLoggedIn, userObj }) {
   const history = useHistory();
-  console.log(userObj);
   return (
     <div className="header__Container">
       {isLoggedIn ? (
@@ -14,16 +13,14 @@ function Header({ isLoggedIn, userObj }) {
             <h1>MyShy</h1>
           </Link>
           <div className="header__LinkContainer">
-            <Link
-              style={{ textDecoration: "none", color: "white" }}
-              to="/register"
-            >
-              <Button>마이페이지</Button>
+            <Link style={{ textDecoration: "none", color: "white" }} to="/post">
+              <Button>글쓰기</Button>
             </Link>
             <Button
               onClick={() => {
                 localStorage.removeItem("token");
-                window.location.reload();
+                history.push("/");
+                history.go(0);
               }}
             >
               로그아웃

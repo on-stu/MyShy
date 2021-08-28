@@ -1,0 +1,8 @@
+.post__Container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.post__header {
+  height: 50px;
+}

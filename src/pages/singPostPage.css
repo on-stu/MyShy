@@ -1,0 +1,7 @@
+.singpost__Container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+  row-gap: 15px;
+}

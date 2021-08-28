@@ -1,0 +1,36 @@
+.singview__Container {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+.singview__InnerContainer {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.singview__PlayerContainer {
+  display: flex;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+  flex-direction: column;
+  width: 90%;
+  min-width: 900px;
+  border: 1px solid black;
+  border-radius: 15px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 12px;
+}
+.singview__Player {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+.singview__footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  column-gap: 5px;
+}

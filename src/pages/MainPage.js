@@ -1,59 +1,52 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./mainPage.css";
-import SearchIcon from "@material-ui/icons/Search";
-import axios from "axios";
 import Card from "../components/Card";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-function MainPage() {
+function MainPage({ userObj }) {
+  const history = useHistory();
+  const [sings, setSings] = useState([]);
+  const [singsLoaded, setSingsLoaded] = useState(false);
+
+  const getSings = async () => {
+    await axios.post("http://localhost:3001/api/getsings").then((response) => {
+      console.log(response.data.sings);
+      setSings(response.data.sings);
+      console.log(sings);
+    });
+  };
+
+  useEffect(() => {
+    getSings();
+    console.log(sings);
+  }, []);
+
   return (
     <div className="main__Container">
       <div className="main__InnerContainer">
         <div className="main__SearchContainer">
           <input type="text" placeholder="검색어를 입력하세요" />
-          <SearchIcon />
+          <FontAwesomeIcon icon={faSearch} />
         </div>
         <div className="main__col1">
           <div className="main__col1__header">
             <h3>승호 노래영상</h3>
-            <button>더보기</button>
+            <button onClick={() => history.push("/singview")}>더보기</button>
           </div>
           <div className="main__col1__body">
-            <Card
-              title="니 곁이라면"
-              preview="진짜 좆되는 라이브"
-              commentNum={31}
-              likes={20}
-            />
-            <Card
-              title="너였다면"
-              preview="진짜 좆되는 라이브"
-              commentNum={31}
-              likes={1}
-            />
-            <Card
-              title="안녕 나의 사랑"
-              preview="진짜 좆되는 라이브"
-              commentNum={31}
-              likes={2}
-            />
-            <Card
-              title="잘가요"
-              preview="진짜 좆되는 라이브"
-              commentNum={31}
-              likes={40}
-            />
-            <Card
-              title="그 사람"
-              preview="진짜 좆되는 라이브"
-              commentNum={31}
-              likes={50}
-            />
-            <Card
-              title="너를 만나"
-              preview="진짜 좆되는 라이브"
-              commentNum={31}
-              likes={60}
-            />
+            {sings.slice(0, 6).map((item) => (
+              <Card
+                title={item.title.slice(9)}
+                key={item._id}
+                id={item._id}
+                likes={item.likes}
+                preview={item.description.slice(0, 22)}
+                commentNum={item.comments.length}
+              />
+            ))}
           </div>
         </div>
         <div className="main__col1">

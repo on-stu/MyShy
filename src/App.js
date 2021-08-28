@@ -4,7 +4,10 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import LoginPage from "./pages/LoginPage";
 import MainPage from "./pages/MainPage";
+import PostPage from "./pages/PostPage";
 import RegisterPage from "./pages/RegisterPage";
+import SingPostPage from "./pages/SingPostPage";
+import SingViewPage from "./pages/SingViewPage";
 
 function App() {
   const [userObj, setUserObj] = useState({});
@@ -32,7 +35,9 @@ function App() {
     <BrowserRouter>
       <Header isLoggedIn={isLoggedIn} userObj={userObj} />
       <Switch>
-        <Route exact path="/" isLoggedIn={isLoggedIn} component={MainPage} />
+        <Route exact path="/">
+          <MainPage userObj={userObj} />
+        </Route>
         <Route path="/login">
           <LoginPage isLoggedIn={isLoggedIn} />
         </Route>
@@ -41,6 +46,14 @@ function App() {
           isLoggedIn={isLoggedIn}
           component={RegisterPage}
         />
+        <Route path="/post">
+          <PostPage />
+        </Route>
+        <Route path="/singview/:id" component={SingViewPage} />
+
+        <Route path="/singpost">
+          <SingPostPage userObj={userObj} isLoggedIn={isLoggedIn} />
+        </Route>
       </Switch>
     </BrowserRouter>
   );
