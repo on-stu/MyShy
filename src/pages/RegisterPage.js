@@ -3,6 +3,7 @@ import Button from "@material-ui/core/Button";
 import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { ApiInstance } from "../lib/ApiInstance";
 
 function RegisterPage() {
   const [username, setUsername] = useState("");
@@ -26,7 +27,7 @@ function RegisterPage() {
 
   const Register = async () => {
     await axios
-      .post("http://localhost:3001/api/register", {
+      .post(`${ApiInstance}/register`, {
         username,
         password,
         nickname,

@@ -6,6 +6,7 @@ import LoginPage from "./pages/LoginPage";
 import MainPage from "./pages/MainPage";
 import PostPage from "./pages/PostPage";
 import RegisterPage from "./pages/RegisterPage";
+import SingListPage from "./pages/SingListPage";
 import SingPostPage from "./pages/SingPostPage";
 import SingViewPage from "./pages/SingViewPage";
 
@@ -29,7 +30,7 @@ function App() {
   }
   useEffect(() => {
     checkIsLoggedIn(token);
-  }, []);
+  }, [token]);
 
   return (
     <BrowserRouter>
@@ -54,6 +55,7 @@ function App() {
         <Route path="/singpost">
           <SingPostPage userObj={userObj} isLoggedIn={isLoggedIn} />
         </Route>
+        <Route path="/singlist" component={SingListPage} />
       </Switch>
     </BrowserRouter>
   );

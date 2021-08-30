@@ -5,24 +5,23 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { ApiInstance } from "../lib/ApiInstance";
 
-function MainPage({ userObj }) {
+function MainPage({ userObj, isLoggedIn }) {
   const history = useHistory();
   const [sings, setSings] = useState([]);
-  const [singsLoaded, setSingsLoaded] = useState(false);
 
   const getSings = async () => {
-    await axios.post("http://localhost:3001/api/getsings").then((response) => {
+    await axios.post(`${ApiInstance}/getsings`).then((response) => {
       console.log(response.data.sings);
       setSings(response.data.sings);
-      console.log(sings);
     });
   };
 
   useEffect(() => {
     getSings();
-    console.log(sings);
-  }, []);
+    console.log(isLoggedIn);
+  }, [isLoggedIn]);
 
   return (
     <div className="main__Container">
@@ -34,7 +33,7 @@ function MainPage({ userObj }) {
         <div className="main__col1">
           <div className="main__col1__header">
             <h3>승호 노래영상</h3>
-            <button onClick={() => history.push("/singview")}>더보기</button>
+            <button onClick={() => history.push("/singlist")}>더보기</button>
           </div>
           <div className="main__col1__body">
             {sings.slice(0, 6).map((item) => (
@@ -45,6 +44,7 @@ function MainPage({ userObj }) {
                 likes={item.likes}
                 preview={item.description.slice(0, 22)}
                 commentNum={item.comments.length}
+                isLoggedIn={isLoggedIn}
               />
             ))}
           </div>

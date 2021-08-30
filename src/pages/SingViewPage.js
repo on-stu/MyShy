@@ -4,19 +4,19 @@ import ReactPlayer from "react-player";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment, faHeart } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
+import { ApiInstance } from "../lib/ApiInstance";
 
-function SingViewPage({ match }) {
+function SingViewPage({ match, isLoggedIn }) {
   const [sing, setSing] = useState([]);
+  console.log(isLoggedIn);
   const {
     params: { id },
   } = match;
   const getSingById = async () => {
-    await axios
-      .post(`http://localhost:3001/api/getsingbyid/${id}`)
-      .then((response) => {
-        console.log(response.data.sing[0]);
-        setSing(response.data.sing[0]);
-      });
+    await axios.post(`${ApiInstance}/getsingbyid/${id}`).then((response) => {
+      console.log(response.data.sing[0]);
+      setSing(response.data.sing[0]);
+    });
   };
 
   useEffect(() => {
@@ -30,7 +30,12 @@ function SingViewPage({ match }) {
           <div className="singview__PlayerContainer">
             <h1>{sing.title}</h1>
             <div className="singview__Player">
-              <ReactPlayer url={sing.url} playing={false} controls={true} />
+              <ReactPlayer
+                url={sing.url}
+                playing={false}
+                loop={true}
+                controls={true}
+              />
             </div>
             <p>{sing.description}</p>
             <div className="singview__footer">

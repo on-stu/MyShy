@@ -18,12 +18,12 @@ const StyledLink = styled(Link)`
   }
 `;
 
-function Card({ title, preview, commentNum, likes, id }) {
+function Card({ title, preview, commentNum, likes, id, isLoggedIn }) {
   console.log(id);
   return (
     <div className="card__Container">
       <div className="card__left">
-        <StyledLink to={`/singview/${id}`}>
+        <StyledLink to={`/singview/${id}`} isLoggedIn={isLoggedIn}>
           <h3>{title}</h3>
         </StyledLink>
         <span>{preview}...</span>

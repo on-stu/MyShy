@@ -5,6 +5,8 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileUpload } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
+import { ApiInstance } from "../lib/ApiInstance";
 
 const Container = styled.div`
   display: flex;
@@ -35,6 +37,7 @@ function SingPostPage({ userObj }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
+  const history = useHistory();
 
   const onSingUpload = async () => {
     const req = {
@@ -44,18 +47,23 @@ function SingPostPage({ userObj }) {
       creatorId: userObj.user.id,
       createdAt: Date.now(),
     };
-    await axios.post("http://localhost:3001/api/singpost", req).then((res) => {
-      const { data: status } = res;
-      console.log(res.data.status);
-      if (status === "success") {
-        alert("업로드에 성공했습니다!");
-        setTitle("");
-        setDescription("");
-        setUrl("");
-      } else {
-        console.log("error");
-      }
-    });
+    await axios
+      .post(`${ApiInstance}/singpost`, req)
+      .then((res) => {
+        const { data: status } = res;
+
+        if (status === "success") {
+          alert("업로드에 성공했습니다!");
+          setTitle("");
+          setDescription("");
+          setUrl("");
+        } else {
+          console.log("error");
+        }
+      })
+      .then(() => {
+        history.push("/");
+      });
   };
 
   return (

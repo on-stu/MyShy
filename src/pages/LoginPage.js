@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./loginPage.css";
 import KaKaoLogin from "react-kakao-login";
+import { ApiInstance } from "../lib/ApiInstance";
 
 function LoginPage({ isLoggedIn }) {
   const history = useHistory();
@@ -16,17 +17,15 @@ function LoginPage({ isLoggedIn }) {
 
   const responseKaKao = async (res) => {
     console.log("kakao", res);
-    await axios
-      .post("http://localhost:3001/api/kakaoLogin", res)
-      .then((res) => {
-        console.log(res.data);
-        if (res.data.status === "success") {
-          console.log("the token is", res.data.data);
-          localStorage.setItem("token", res.data.data);
-          history.replace("/");
-          history.go(0);
-        }
-      });
+    await axios.post(`${ApiInstance}/kakaoLogin`, res).then((res) => {
+      console.log(res.data);
+      if (res.data.status === "success") {
+        console.log("the token is", res.data.data);
+        localStorage.setItem("token", res.data.data);
+        history.replace("/");
+        history.go(0);
+      }
+    });
   };
 
   const onChange = (event) => {
@@ -43,7 +42,7 @@ function LoginPage({ isLoggedIn }) {
 
   const LogIn = async () => {
     await axios
-      .post("http://localhost:3001/api/login", { username, password })
+      .post(`${ApiInstance}/login`, { username, password })
       .then((res) => {
         console.log(res.data);
         if (res.data.status === "success") {

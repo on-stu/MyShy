@@ -4,6 +4,7 @@
   display: flex;
   justify-content: center;
   background-color: #537fa8;
+  position: sticky;
 }
 
 .header__InnerContainer {
