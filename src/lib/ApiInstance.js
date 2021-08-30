@@ -1,1 +1,2 @@
-export const ApiInstance = "http://3.35.229.84:3001/api";
+export const ApiInstance =
+  "http://ec2-3-35-229-84.ap-northeast-2.compute.amazonaws.com:3001/api";
