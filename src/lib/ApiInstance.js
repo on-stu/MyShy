@@ -1,1 +1,1 @@
-export const ApiInstance = "http://13.209.57.114:3001/api";
+export const ApiInstance = "https://myshy-server.herokuapp.com/api";
