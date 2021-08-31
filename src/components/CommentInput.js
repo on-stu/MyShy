@@ -71,9 +71,8 @@ function CommentInput({ singId, userObj }) {
       .post(`${ApiInstance}/postcomment`, req)
       .then((res) => {
         const { data: status } = res;
-
+        console.log(res);
         if (status === "success") {
-          alert("업로드에 성공했습니다!");
           console.log(res);
         } else {
           console.log("error");

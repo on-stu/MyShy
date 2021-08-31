@@ -15,6 +15,7 @@ import { actionCreators } from "./store/store";
 
 function App() {
   const [userObj, setUserObj] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
@@ -25,9 +26,11 @@ function App() {
       .then((res) => {
         if (res.data.status === "success") {
           setUserObj(res.data);
+          setIsLoggedIn(true);
           dispatch(actionCreators.getUserObj(res.data.user));
         } else {
           setUserObj({});
+          setIsLoggedIn(false);
         }
       });
   }
@@ -37,17 +40,17 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header isLoggedIn={Boolean(userObj)} userObj={userObj} />
+      <Header isLoggedIn={isLoggedIn} userObj={userObj} />
       <Switch>
         <Route exact path="/">
           <MainPage userObj={userObj} />
         </Route>
         <Route path="/login">
-          <LoginPage isLoggedIn={Boolean(userObj)} />
+          <LoginPage isLoggedIn={isLoggedIn} />
         </Route>
         <Route
           path="/register"
-          isLoggedIn={Boolean(userObj)}
+          isLoggedIn={isLoggedIn}
           component={RegisterPage}
         />
         <Route path="/post">
@@ -56,7 +59,7 @@ function App() {
         <Route path="/singview/:id" component={SingViewPage} />
 
         <Route path="/singpost">
-          <SingPostPage userObj={userObj} isLoggedIn={Boolean(userObj)} />
+          <SingPostPage userObj={userObj} isLoggedIn={isLoggedIn} />
         </Route>
         <Route path="/singlist" component={SingListPage} />
       </Switch>
