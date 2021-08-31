@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
+import { ApiInstance } from "./lib/ApiInstance";
 import LoginPage from "./pages/LoginPage";
 import MainPage from "./pages/MainPage";
 import PostPage from "./pages/PostPage";
@@ -17,7 +18,7 @@ function App() {
 
   async function checkIsLoggedIn(token) {
     await axios
-      .post("http://localhost:3001/api/checkIsLoggedIn", { token })
+      .post(`${ApiInstance}/checkIsLoggedIn`, { token })
       .then((res) => {
         if (res.data.status === "success") {
           setUserObj(res.data);
