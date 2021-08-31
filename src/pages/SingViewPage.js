@@ -5,17 +5,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment, faHeart } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
 import { ApiInstance } from "../lib/ApiInstance";
+import { useSelector } from "react-redux";
 
-function SingViewPage({ match, isLoggedIn }) {
+function SingViewPage({ match }) {
   const [sing, setSing] = useState([]);
-  console.log(isLoggedIn);
+  const [comments, setComments] = useState([]);
+
+  const userObj = useSelector((state) => state);
+
   const {
     params: { id },
   } = match;
+
   const getSingById = async () => {
     await axios.post(`${ApiInstance}/getsingbyid/${id}`).then((response) => {
       console.log(response.data.sing[0]);
       setSing(response.data.sing[0]);
+      setComments(response.data.sing[0].comments);
     });
   };
 
@@ -43,8 +49,9 @@ function SingViewPage({ match, isLoggedIn }) {
               <h3>{sing.likes}</h3>
               &nbsp;
               <FontAwesomeIcon icon={faComment} size="2x" />
-              <h3>0</h3>
+              <h3>{comments ? comments.length : 0}</h3>
             </div>
+            <h1>{userObj ? userObj.userObj.nickname : ""}</h1>
           </div>
         </div>
       </div>

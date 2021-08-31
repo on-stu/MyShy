@@ -19,7 +19,6 @@ const StyledLink = styled(Link)`
 `;
 
 function Card({ title, preview, commentNum, likes, id, isLoggedIn }) {
-  console.log(id);
   return (
     <div className="card__Container">
       <div className="card__left">

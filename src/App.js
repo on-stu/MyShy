@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import { ApiInstance } from "./lib/ApiInstance";
@@ -10,19 +11,24 @@ import RegisterPage from "./pages/RegisterPage";
 import SingListPage from "./pages/SingListPage";
 import SingPostPage from "./pages/SingPostPage";
 import SingViewPage from "./pages/SingViewPage";
+import { actionCreators } from "./store/store";
 
 function App() {
   const [userObj, setUserObj] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const token = localStorage.getItem("token");
+  const userStore = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   async function checkIsLoggedIn(token) {
     await axios
       .post(`${ApiInstance}/checkIsLoggedIn`, { token })
       .then((res) => {
         if (res.data.status === "success") {
+          console.log(res.data.user);
           setUserObj(res.data);
           setIsLoggedIn(true);
+          dispatch(actionCreators.getUserObj(res.data.user));
         } else {
           setUserObj({});
           setIsLoggedIn(false);
@@ -31,7 +37,8 @@ function App() {
   }
   useEffect(() => {
     checkIsLoggedIn(token);
-  }, [token]);
+    console.log(userStore);
+  }, []);
 
   return (
     <BrowserRouter>
