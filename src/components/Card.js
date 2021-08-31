@@ -22,7 +22,7 @@ function Card({ title, preview, commentNum, likes, id, isLoggedIn }) {
   return (
     <div className="card__Container">
       <div className="card__left">
-        <StyledLink to={`/singview/${id}`} isLoggedIn={isLoggedIn}>
+        <StyledLink to={`/singview/${id}`}>
           <h3>{title}</h3>
         </StyledLink>
         <span>{preview}...</span>

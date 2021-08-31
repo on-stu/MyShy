@@ -35,9 +35,8 @@ function SingListPage() {
 
   const handleScroll = (e) => {
     const { offsetHeight, scrollTop, scrollHeight } = e.target;
-    console.log(offsetHeight);
+
     if (offsetHeight + scrollTop === scrollHeight) {
-      console.log("scrolled");
       setSkip(sings.length);
     }
   };

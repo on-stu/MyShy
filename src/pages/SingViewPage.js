@@ -6,6 +6,8 @@ import { faComment, faHeart } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
 import { ApiInstance } from "../lib/ApiInstance";
 import { useSelector } from "react-redux";
+import Comments from "../components/Comments";
+import CommentInput from "../components/CommentInput";
 
 function SingViewPage({ match }) {
   const [sing, setSing] = useState([]);
@@ -51,8 +53,23 @@ function SingViewPage({ match }) {
               <FontAwesomeIcon icon={faComment} size="2x" />
               <h3>{comments ? comments.length : 0}</h3>
             </div>
-            <h1>{userObj ? userObj.userObj.nickname : ""}</h1>
           </div>
+          {userObj ? (
+            <CommentInput singId={id} userObj={userObj.userObj} />
+          ) : (
+            ""
+          )}
+          {comments.length > 0 ? (
+            comments.map((comment) => (
+              <Comments
+                key={comment.createdAt}
+                nickname={comment.creatorNickname}
+                content={comment.comment}
+              />
+            ))
+          ) : (
+            <h4>아직 댓글이 없습니다!</h4>
+          )}
         </div>
       </div>
     </>

@@ -13,15 +13,13 @@ function MainPage({ userObj, isLoggedIn }) {
 
   const getSings = async () => {
     await axios.post(`${ApiInstance}/getsings`).then((response) => {
-      console.log(response.data.sings);
       setSings(response.data.sings);
     });
   };
 
   useEffect(() => {
     getSings();
-    console.log(isLoggedIn);
-  }, [isLoggedIn]);
+  }, []);
 
   return (
     <div className="main__Container">

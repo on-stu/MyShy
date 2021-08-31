@@ -15,9 +15,8 @@ import { actionCreators } from "./store/store";
 
 function App() {
   const [userObj, setUserObj] = useState({});
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const token = localStorage.getItem("token");
-  const userStore = useSelector((state) => state);
   const dispatch = useDispatch();
 
   async function checkIsLoggedIn(token) {
@@ -25,34 +24,30 @@ function App() {
       .post(`${ApiInstance}/checkIsLoggedIn`, { token })
       .then((res) => {
         if (res.data.status === "success") {
-          console.log(res.data.user);
           setUserObj(res.data);
-          setIsLoggedIn(true);
           dispatch(actionCreators.getUserObj(res.data.user));
         } else {
           setUserObj({});
-          setIsLoggedIn(false);
         }
       });
   }
   useEffect(() => {
     checkIsLoggedIn(token);
-    console.log(userStore);
   }, []);
 
   return (
     <BrowserRouter>
-      <Header isLoggedIn={isLoggedIn} userObj={userObj} />
+      <Header isLoggedIn={Boolean(userObj)} userObj={userObj} />
       <Switch>
         <Route exact path="/">
           <MainPage userObj={userObj} />
         </Route>
         <Route path="/login">
-          <LoginPage isLoggedIn={isLoggedIn} />
+          <LoginPage isLoggedIn={Boolean(userObj)} />
         </Route>
         <Route
           path="/register"
-          isLoggedIn={isLoggedIn}
+          isLoggedIn={Boolean(userObj)}
           component={RegisterPage}
         />
         <Route path="/post">
@@ -61,7 +56,7 @@ function App() {
         <Route path="/singview/:id" component={SingViewPage} />
 
         <Route path="/singpost">
-          <SingPostPage userObj={userObj} isLoggedIn={isLoggedIn} />
+          <SingPostPage userObj={userObj} isLoggedIn={Boolean(userObj)} />
         </Route>
         <Route path="/singlist" component={SingListPage} />
       </Switch>
